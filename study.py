@@ -8,15 +8,38 @@ soup = BeautifulSoup(driver.page_source, "lxml")
 
 i = 1
 rawdata = []
+# for data in soup.findAll(name="div", attrs={"class":"grp"}):
+#     stripdata = data.text.strip()
+#     rawdata = stripdata.split('\n')
+#
+#     print(str(i)+'위  : '+rawdata[0])
+#     print(rawdata[1]+'\n')
+#
+#
+#     #print(str(i)+"위 : "+data.text.strip())
+#     i += 1
+#     if i == 5:
+#         break
+
+j=1
+k=1
 for data in soup.findAll(name="div", attrs={"class":"grp"}):
     stripdata = data.text.strip()
     rawdata = stripdata.split('\n')
 
-    print(str(i)+'위  : '+rawdata[0])
-    print(rawdata[1]+'\n')
+    if j == 1:
+        print(str(k) + '위  : ' + rawdata[0])
+        print(rawdata[1] + '\n')
+        j += 1
+        k += 1
+    elif j % 4 == 0:
+        print(str(k) + '위  : ' + rawdata[0])
+        print(rawdata[1] + '\n')
+        j += 1
+        k += 1
+    else:
+        j += 1
 
-
-    #print(str(i)+"위 : "+data.text.strip())
-    i += 1
-    if i == 5:
+    if k == 6:
         break
+#4 7 10 13 16
