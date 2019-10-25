@@ -32,7 +32,7 @@ for data in soup.findAll(name="div", attrs={"class":"grp"}):
         print(rawdata[1] + '\n')
         j += 1
         k += 1
-    elif j % 4 == 0:
+    elif j % (3*k-2) == 0:
         print(str(k) + '위  : ' + rawdata[0])
         print(rawdata[1] + '\n')
         j += 1
