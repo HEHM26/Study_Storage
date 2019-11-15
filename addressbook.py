@@ -1,7 +1,11 @@
 import openpyxl
+from openpyxl import load_workbook
+
 import glob
 import os.path
 
+
+#초기 엑셀 파일 생성
 wb = openpyxl.Workbook()
 wb.save('addressbook.xlsx')
 sheet1 = wb.active
@@ -28,6 +32,18 @@ def print_contact(contact_list):
         contact.print_info()
 
 def print_contact_renew():
+    load_wb = load_workbook('addressbook.xlsx')
+    load_ws = load_wb['Sheet']
+
+    all_value = []
+    for row in load_ws.rows:
+        row_value = []
+        for cell in row:
+            row_value.append(cell.value)
+        all_value.append(row_value)
+    for i in (0,):
+        print(all_value[i])
+
 
 
 # def set_contact():
@@ -39,6 +55,7 @@ def print_contact_renew():
 #     return contact
 
 def set_contact_renew():
+    #addressbook.xlsx 파일읽기
     wb = openpyxl.load_workbook('addressbook.xlsx')
     sheet1 = wb.active
 
@@ -73,7 +90,7 @@ def run():
             contact = set_contact_renew()
             contact_list.append(contact)
         elif menu == 2:
-            print_contact(contact_list)
+            print_contact_renew()
         elif menu == 3:
             name = input("Delete Name : ")
             delete_contact(contact_list, name)
