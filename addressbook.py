@@ -1,16 +1,8 @@
 import openpyxl
 from openpyxl import load_workbook
 
-import glob
-import os.path
+import os
 
-
-#초기 엑셀 파일 생성
-wb = openpyxl.Workbook()
-wb.save('addressbook.xlsx')
-sheet1 = wb.active
-
-#C:\Users\Mark\Desktop\GitHub\mySTG
 class Contact:
     def __init__(self,name,phone,email,addr):
         self.name = name
@@ -26,7 +18,6 @@ class Contact:
         print("Address: ", self.addr)
         print("\n")
 
-
 def print_contact(contact_list):
     for contact in contact_list:
         contact.print_info()
@@ -36,14 +27,11 @@ def print_contact_renew():
     load_ws = load_wb['Sheet']
 
     all_value = []
-    for row in load_ws.rows:
-        row_value = []
+    for row in sheet1.iter_rows():
+        a = []
         for cell in row:
-            row_value.append(cell.value)
-        all_value.append(row_value)
-    for i in (0,):
-        print(all_value[i])
-
+            a.append(cell.value)
+        all_value.append(a)
 
 
 # def set_contact():
@@ -56,9 +44,8 @@ def print_contact_renew():
 
 def set_contact_renew():
     #addressbook.xlsx 파일읽기
-    wb = openpyxl.load_workbook('addressbook.xlsx')
-    sheet1 = wb.active
-
+    # wb = openpyxl.load_workbook('addressbook.xlsx')
+    # sheet1 = wb.active
     name = input("Name      : ")
     phone = input("PH       : ")
     email = input("Email    : ")
@@ -99,6 +86,21 @@ def run():
         else:
             print("Error")
 
-if __name__ == "__main__":
+#초기 엑셀 파일 생성
 
+
+#C:\Users\Mark\Desktop\GitHub\mySTG
+path = "/Users/Mark/Desktop/GitHub/mySTG"
+file_names = os.listdir(path)
+
+for file_name in file_names:
+    if file_name == 'addressbook.xlsx':
+        wb = openpyxl.load_workbook('addressbook.xlsx')
+        sheet1 = wb.active
+    else:
+        wb = openpyxl.Workbook()
+        wb.save('addressbook.xlsx')
+        sheet1 = wb.active
+
+if __name__ == "__main__":
     run()
